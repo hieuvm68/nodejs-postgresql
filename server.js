@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 //khóa await đợi chạy xong ms chạy cái kia
 // console.log("POOL", pool);
 
-app.get("/todos", async (req, res) => {
+app.get("/quotes", async (req, res) => {
   try {
     const todos = await pool.query(`SELECT * FROM loaidvdangkykham`);
     //sau khi phan hồi nó sẽ lưu vô todoss,
