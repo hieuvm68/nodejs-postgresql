@@ -80,7 +80,7 @@ app.post("/numbers", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT, () => {
   console.log(`Server running on PORT ${PORT}`);
 });
 // có thể sử dụng để lắng nghe 1 trong những j họ nghe với express sau đó đặt 1 fc -> chỉ để log ra ns server đang chạy port ....
