@@ -28,10 +28,9 @@ app.get("/", (req, res) => {
 //khóa await đợi chạy xong ms chạy cái kia
 // console.log("POOL", pool);
 
-
 app.get("/todos", async (req, res) => {
   try {
-    const todos = await pool.query(`SELECT * FROM loaidvdangkykham `);
+    const todos = await pool.query(`SELECT * FROM loaidvdangkykham`);
     //sau khi phan hồi nó sẽ lưu vô todoss,
     console.log("xxxxxxxxxxxxxx", res.json(todos.rows));
     res.json(todos.rows);
@@ -80,7 +79,7 @@ app.post("/numbers", async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);
 });
 // có thể sử dụng để lắng nghe 1 trong những j họ nghe với express sau đó đặt 1 fc -> chỉ để log ra ns server đang chạy port ....
