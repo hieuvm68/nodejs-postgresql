@@ -28,7 +28,6 @@ app.get("/", (req, res) => {
 //khóa await đợi chạy xong ms chạy cái kia
 // console.log("POOL", pool);
 
-
 app.post("/editenv", (req, res) => {
   // console.log(req.body);
   const { hostTest, user, pass, DB } = req.body;
