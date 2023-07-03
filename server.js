@@ -28,18 +28,18 @@ app.get("/", (req, res) => {
 //khóa await đợi chạy xong ms chạy cái kia
 // console.log("POOL", pool);
 
-app.get("/quotes", async (req, res) => {
+app.get("/todos", async (req, res) => {
   try {
     const todos = await pool.query(`SELECT * FROM loaidvdangkykham`);
     //sau khi phan hồi nó sẽ lưu vô todoss,
-    console.log("xxxxxxxxxxxxxx", res.json(todos.rows));
+    // console.log("xxxxxxxxxxxxxx", res.json(todos.rows));
     res.json(todos.rows);
   } catch (err) {
     console.error(err);
   }
 });
 app.post("/editenv", (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const { hostTest, user, pass, DB } = req.body;
 
   // Tạo nội dung cho tệp .env
