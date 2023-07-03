@@ -9,7 +9,7 @@ const fs = require("fs");
 // Sử dụng body-parser
 
 const app = express();
-// const cors = require("cors");
+const cors = require("cors");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // sau đó sẽ lưu xuống app để chúng ta có thể sử dụng nó <+> có thể sd những phương thức và thuộc tính
