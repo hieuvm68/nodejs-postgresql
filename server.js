@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // sau đó sẽ lưu xuống app để chúng ta có thể sử dụng nó <+> có thể sd những phương thức và thuộc tính
 app.use(
   cors({
-    origin: "https://nodejs-postgresql-vzu7.onrender.com",
+    // origin: "https://nodejs-postgresql-vzu7.onrender.com",
     credentials: true,
   })
 );
