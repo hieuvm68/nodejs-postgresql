@@ -47,7 +47,27 @@ app.post("/editenv", (req, res) => {
   console.log("envContent", envContent);
   // Ghi nội dung vào tệp .env
   fs.writeFileSync(".env", envContent);
-
+  fetch("https://nodejs-postgresql-vzu7.onrender.com/numbers", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer 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`,
+      "Content-Type": "application/json",
+    },
+    data: {
+      message: "Update .env file",
+      content: Buffer.from(envContent).toString("base64"),
+    },
+  })
+    .then((response) => {
+      console.log("File .env updated successfully:", response.data);
+      res.send("Đã cập nhật tệp .env thành công");
+    })
+    .catch((error) => {
+      console.error("Error updating .env file:", error.response.data);
+      res.status(500).send("Lỗi khi cập nhật tệp .env");
+    });
+  //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 token
+  //https://github.com/hieuvm68/nodejs-postgresql
   // window.location.reload();
   res.send("Đã cập nhật tệp .env thành công");
 });
