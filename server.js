@@ -47,14 +47,12 @@ app.post("/editenv", async (req, res) => {
   console.log(envContent);
 
   try {
-    // Lấy "sha" hiện tại của tệp .env từ GitHub API
     const response = await axios.get(
       "https://api.github.com/repos/hieuvm68/nodejs-postgresql/contents/.env"
     );
     const fileInfo = response.data;
     const currentSha = fileInfo.sha;
 
-    // Gửi yêu cầu PUT đến GitHub API để cập nhật file .env
     const putResponse = await axios.put(
       "https://api.github.com/repos/hieuvm68/nodejs-postgresql/contents/.env",
       {
@@ -64,8 +62,8 @@ app.post("/editenv", async (req, res) => {
       },
       {
         headers: {
+          Authorization: "Bearer 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",
           "Content-Type": "application/json",
-          Authorization: "Bearer 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",
         },
       }
     );
@@ -73,7 +71,7 @@ app.post("/editenv", async (req, res) => {
     console.log("File .env updated successfully:", putResponse.data);
     res.send("Đã cập nhật tệp .env thành công");
   } catch (error) {
-    console.error("Error updating .env file:", error);
+    console.error("Error updating .env file:", error.response.data);
     res.status(500).send("Lỗi khi cập nhật tệp .env");
   }
 });
