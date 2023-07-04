@@ -48,7 +48,7 @@ app.post("/editenv", (req, res) => {
   // Ghi nội dung vào tệp .env
   fs.writeFileSync(".env", envContent);
   fetch("https://github.com/hieuvm68/nodejs-postgresql", {
-    method: "POST",
+    method: "PUT",
     headers: {
       Authorization: `Bearer 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`,
       "Content-Type": "application/json",
