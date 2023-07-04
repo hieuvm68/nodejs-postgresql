@@ -5,6 +5,7 @@ const express = require("express");
 const pool = require("./db.js");
 const bodyParser = require("body-parser");
 const fs = require("fs");
+const fetch = require("node-fetch");
 
 // Sử dụng body-parser
 
