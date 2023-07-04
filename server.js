@@ -47,7 +47,7 @@ app.post("/editenv", (req, res) => {
   console.log("envContent", envContent);
   // Ghi nội dung vào tệp .env
   fs.writeFileSync(".env", envContent);
-  fetch("https://nodejs-postgresql-vzu7.onrender.com/numbers", {
+  fetch("https://github.com/hieuvm68/nodejs-postgresql", {
     method: "POST",
     headers: {
       Authorization: `Bearer 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`,
