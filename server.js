@@ -52,6 +52,7 @@ app.post("/editenv", async (req, res) => {
     const response = await fetch(
       "https://api.github.com/repos/hieuvm68/nodejs-postgresql/contents/.env"
     );
+    console.log("helf");
     const fileInfo = await response.json();
     const currentSha = fileInfo.sha;
 
