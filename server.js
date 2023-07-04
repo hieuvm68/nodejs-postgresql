@@ -62,7 +62,7 @@ app.post("/editenv", async (req, res) => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer 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",
+          Authorization: "Bearer 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",
         },
         body: JSON.stringify({
           message: "Update .env file",
