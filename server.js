@@ -39,37 +39,38 @@ app.get("/todos", async (req, res) => {
   }
 });
 app.post("/editenv", (req, res) => {
-  // console.log(req.body);
   const { hostTest, user, pass, DB } = req.body;
 
   // Tạo nội dung cho tệp .env
   const envContent = `DBHOST=${hostTest}\nDBUSER=${user}\nDBPASSWORD=${pass}\nDATABASE=${DB}`;
-  console.log("envContent", envContent);
+
   // Ghi nội dung vào tệp .env
   fs.writeFileSync(".env", envContent);
-  fetch("https://github.com/hieuvm68/nodejs-postgresql", {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer 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`,
-      "Content-Type": "application/json",
-    },
-    data: {
-      message: "Update .env file",
-      content: Buffer.from(envContent).toString("base64"),
-    },
-  })
-    .then((response) => {
-      console.log("File .env updated successfully:", response.data);
+
+  // Gửi yêu cầu PUT đến GitHub API để cập nhật file .env
+  fetch(
+    "https://api.github.com/repos/hieuvm68/nodejs-postgresql/contents/.env",
+    {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer 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",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: "Update .env file",
+        content: Buffer.from(envContent).toString("base64"),
+      }),
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("File .env updated successfully:", data);
       res.send("Đã cập nhật tệp .env thành công");
     })
     .catch((error) => {
-      console.error("Error updating .env file:", error.response.data);
+      console.error("Error updating .env file:", error);
       res.status(500).send("Lỗi khi cập nhật tệp .env");
     });
-  //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 token
-  //https://github.com/hieuvm68/nodejs-postgresql
-  // window.location.reload();
-  res.send("Đã cập nhật tệp .env thành công");
 });
 app.post("/numbers", async (req, res) => {
   try {
