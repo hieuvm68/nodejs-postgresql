@@ -8,6 +8,7 @@ const fs = require("fs");
 const axios = require("axios");
 const passport = require("passport");
 const GitHubStrategy = require("passport-github").Strategy;
+const session = require("express-session");
 
 // Sử dụng body-parser
 
@@ -15,6 +16,15 @@ const app = express();
 const cors = require("cors");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    secret: "your-secret-key",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
 // sau đó sẽ lưu xuống app để chúng ta có thể sử dụng nó <+> có thể sd những phương thức và thuộc tính
 app.use(
   cors({
@@ -33,8 +43,8 @@ passport.use(
       callbackURL: CALLBACK_URL,
     },
     function (accessToken, refreshToken, profile, done) {
-      // Xử lý thông tin người dùng từ GitHub
-      // Lưu trữ thông tin người dùng vào session hoặc thực hiện xử lý khác
+      // Process user information from GitHub
+      // Store user information in session or perform other actions
       return done(null, profile);
     }
   )
@@ -50,6 +60,15 @@ passport.deserializeUser(function (user, done) {
 app.use(passport.initialize());
 app.use(passport.session());
 app.get("/auth/github", passport.authenticate("github"));
+app.get(
+  "/auth/github/callback",
+  passport.authenticate("github", { failureRedirect: "/login" }),
+  function (req, res) {
+    // Handle successful authentication
+    res.redirect("/"); // Redirect to the desired page after successful authentication
+  }
+);
+
 app.post(
   "editenv",
   passport.authenticate("github", { failureRedirect: "/login" }),
