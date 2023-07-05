@@ -44,7 +44,8 @@ app.post("/editenv", async (req, res) => {
   // Tạo nội dung cho tệp .env
   const envContent = `DBHOST=${hostTest}\nDBUSER=${user}\nDBPASSWORD=${pass}\nDATABASE=${DB}`;
   console.log(envContent);
-
+  fs.writeFileSync(".env", envContent);
+  //ghi đè file
   try {
     const response = await axios.get(
       "https://api.github.com/repos/hieuvm68/nodejs-postgresql/contents/.env"
@@ -62,7 +63,7 @@ app.post("/editenv", async (req, res) => {
       },
       {
         headers: {
-          Authorization: "Bearer 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",
+          Authorization: "Bearer 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",
           "Content-Type": "application/json",
         },
       }
