@@ -51,7 +51,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.get("/auth/github", passport.authenticate("github"));
 app.post(
-  "/auth/github/callback",
+  "editenv",
   passport.authenticate("github", { failureRedirect: "/login" }),
   async function (req, res) {
     const { hostTest, user, pass, DB } = req.user;
