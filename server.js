@@ -62,7 +62,7 @@ app.post("/editenv", async (req, res) => {
       },
       {
         headers: {
-          Authorization: "Bearer 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",
+          Authorization: "Bearer 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",
           "Content-Type": "application/json",
         },
       }
